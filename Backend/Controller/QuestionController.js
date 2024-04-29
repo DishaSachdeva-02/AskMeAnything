@@ -1,7 +1,8 @@
 const questionService=require('../Services/QuestionService');
 exports.getAllQuestions=async (req,res)=>{
     try{
-      const questions=await questionService.getAllQuestions();
+      const {search}=req.query;
+      const questions=await questionService.getAllQuestions(req.user_email,search);
       if(!questions){
         res.status(404).json({message:"Failed to get Questions"})
       }
@@ -25,7 +26,9 @@ exports.getQuestionById=async (req,res)=>{
 }
 exports.createQuestion=async (req,res)=>{
     try{
-      const question=await questionService.createQuestion(req.body);
+      console.log(req.user_email);
+      const question=await questionService.createQuestion(req.user_email,req.body);
+      
       if(!question){
         res.status(404).json({message:"No question Found"})
       }
