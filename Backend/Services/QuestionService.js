@@ -74,6 +74,7 @@ exports.del=async(id)=>{
       throw new Error("Failed to delete question.")
   }
 }
+
 // exports.addAnswer=async(quest_id,ans_id)=>{
 //   try{
 //     const quest=await Question.findById(quest_id);

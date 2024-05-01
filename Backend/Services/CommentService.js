@@ -8,7 +8,18 @@ exports.getAllComments=async(id)=>{
         throw new Error("Failed to fetch comments.")
     }
 }
-
+exports.getCommentById=async(id)=>{
+    try{
+      const comment= await Comment.findById(id).populate('user');
+      if(!comment){
+        throw new Error("Failed to get comment");
+      }
+      return comment;
+    }
+    catch(error){
+        throw new Error("Failed to fetch comment.")
+    }
+}
 exports.createComment=async(id,email,FieldsValue)=>{
     try{
         const person=await User.findOne({email});

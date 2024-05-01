@@ -10,6 +10,18 @@ exports.getAllAnswers=async(id)=>{
         throw new Error("Failed to fetch answers.")
     }
 }
+exports.getAnswerById=async(id)=>{
+    try{
+      const ans= await Answer.findById(id).populate('comments').populate('user');
+      if(!ans){
+        throw new Error("Failed to get answer");
+      }
+      return ans;
+    }
+    catch(error){
+        throw new Error("Failed to fetch answer.")
+    }
+}
 exports.createAnswer=async(id,email,FieldsValue)=>{
     try{
         const person=await User.findOne({email});

@@ -12,6 +12,18 @@ exports.getAllAnswers=async (req,res)=>{
       res.status(500).json({message:error.message})
     }
 }
+exports.getAnswerById=async (req,res)=>{
+  try{
+    const answer=await answerService.getAnswerById(req.params.id);
+    if(!answer){
+      res.status(404).json({message:"Failed to get answer"})
+    }
+    res.json(answer);
+  }
+  catch(error){
+    res.status(500).json({message:error.message})
+  }
+}
 exports.createAnswer=async (req,res)=>{
     try{
       const answer=await answerService.createAnswer(req.params.id,req.user_email,req.body);
